@@ -1,0 +1,17 @@
+---
+ - hosts: 192.168.56.3
+   tasks:
+    - name: add key
+      apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+    - name: file
+      file:
+        path: /etc/apt/sources.list.d/jenkins.list
+        state: touch
+    - name: lineinfile
+      lineinfile:
+       
+        line: deb http://pkg.jenkins.io/debian-stable binary
+        path:  /etc/apt/sources.list.d/jenkins.list 
+    - name: jenkins
+      apt: name=jenkins sate=present
